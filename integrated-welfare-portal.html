@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamil Nadu Welfare Schemes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #ff6f00;
+            --light-bg: #f5f5f5;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .welcome-section {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: var(--light-bg);
+        }
+
+        .welcome-section h1 {
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            margin-bottom: 2rem;
+        }
+
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .scheme-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .scheme-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .page {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .scheme-details {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .eligibility-list {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Tamil Nadu Integrated Welfare Portal</h1>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('schemes')">Schemes</a></li>
+            <li><a onclick="showPage('apply')">Apply Online</a></li>
+            <li><a onclick="showPage('status')">Application Status</a></li>
+            <li><a onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="welcome-section">
+            <h1>Welcome to Tamil Nadu Welfare Schemes</h1>
+            <p>Empowering citizens through comprehensive welfare programs</p>
+            <button class="button" onclick="showPage('schemes')">Explore Schemes</button>
+        </div>
+
+        <div class="schemes-grid">
+            <div class="scheme-card">
+                <h3>Social Welfare Schemes</h3>
+                <p>Supporting vulnerable sections of society through targeted assistance programs including pension schemes, educational support, and healthcare benefits.</p>
+                <button class="button" onclick="showSchemeDetails('social')">Learn More</button>
+            </div>
+
+            <div class="scheme-card">
+                <h3>Marriage Assistance Scheme</h3>
+                <p>Financial assistance and gold for marriage of young women from economically weaker sections, including special provisions for graduates.</p>
+                <button class="button" onclick="showSchemeDetails('marriage')">Learn More</button>
+            </div>
+
+            <div class="scheme-card">
+                <h3>Farmers Welfare Scheme</h3>
+                <p>Comprehensive support for farmers including crop insurance, equipment subsidies, and drought relief assistance.</p>
+                <button class="button" onclick="showSchemeDetails('farmers')">Learn More</button>
+            </div>
+
+            <div class="scheme-card">
+                <h3>Youth Entrepreneurship Program</h3>
+                <p>Supporting young entrepreneurs through financial assistance, training, and mentorship for starting small businesses.</p>
+                <button class="button" onclick="showSchemeDetails('entrepreneurship')">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schemes Page -->
+    <div id="schemes" class="page">
+        <h2>Available Schemes</h2>
+        <div id="scheme-details" class="scheme-details">
+            <!-- Scheme details will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Apply Online Page -->
+    <div id="apply" class="page">
+        <h2>Apply Online</h2>
+        <div class="scheme-details">
+            <form id="application-form">
+                <div class="form-group">
+                    <label for="scheme">Select Scheme</label>
+                    <select id="scheme" required>
+                        <option value="">Choose a scheme</option>
+                        <option value="social">Social Welfare Schemes</option>
+                        <option value="marriage">Marriage Assistance Scheme</option>
+                        <option value="farmers">Farmers Welfare Scheme</option>
+                        <option value="entrepreneurship">Youth Entrepreneurship Program</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="aadhaar">Aadhaar Number</label>
+                    <input type="text" id="aadhaar" pattern="[0-9]{12}" required>
+                </div>
+
+                <button type="submit" class="button">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Status Page -->
+    <div id="status" class="page">
+        <h2>Check Application Status</h2>
+        <div class="scheme-details">
+            <form id="status-form">
+                <div class="form-group">
+                    <label for="application-id">Application ID</label>
+                    <input type="text" id="application-id" required>
+                </div>
+                <button type="submit" class="button">Check Status</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <h2>Contact Us</h2>
+        <div class="scheme-details">
+            <h3>Get in Touch</h3>
+            <p>Email: support@tnwelfare.gov.in</p>
+            <p>Phone: 1800-XXX-XXXX</p>
+            <p>Address: Department of Social Welfare, Chennai, Tamil Nadu</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Government of Tamil Nadu</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function showSchemeDetails(schemeId) {
+            showPage('schemes');
+            const detailsDiv = document.getElementById('scheme-details');
+            
+            const schemeData = {
+                'social': {
+                    title: 'Social Welfare Schemes',
+                    description: 'Comprehensive support for vulnerable sections of society.',
+                    benefits: [
+                        'Monthly pension for elderly (Rs. 1,000)',
+                        'Healthcare assistance up to Rs. 5,00,000',
+                        'Educational support for children',
+                        'Disability assistance and aid devices'
+                    ],
+                    eligibility: [
+                        'Tamil Nadu residents',
+                        'Below Poverty Line (BPL) category',
+                        'Valid Aadhaar card',
+                        'Income certificate from revenue department'
+                    ]
+                },
+                'marriage': {
+                    title: 'Marriage Assistance Scheme',
+                    description: 'Financial support for marriages in economically weaker sections.',
+                    benefits: [
+                        'Financial assistance of Rs. 50,000',
+                        '8 grams of gold for mangalsutra',
+                        'Additional Rs. 25,000 for graduate brides',
+                        'Special provisions for orphaned girls'
+                    ],
+                    eligibility: [
+                        'Minimum age: 18 years for bride',
+                        'Family annual income below Rs. 72,000',
+                        'First marriage only',
+                        'Application before marriage'
+                    ]
+                },
+                'farmers': {
+                    title: 'Farmers Welfare Scheme',
+                    description: 'Comprehensive support for agricultural development.',
+                    benefits: [
+                        'Crop insurance coverage',
+                        'Farm equipment subsidy up to 50%',
+                        'Interest-free loans up to Rs. 1,00,000',
+                        'Drought relief compensation'
+                    ],
+                    eligibility: [
+                        'Active farmers with land records',
+                        'Tamil Nadu resident',
+                        'Updated land patta documents',
+                        'No existing agricultural loans'
+                    ]
+                },
+                'entrepreneurship': {
+                    title: 'Youth Entrepreneurship Program',
+                    description: 'Support for young entrepreneurs starting businesses.',
+                    benefits: [
+                        'Startup grant up to Rs. 3,00,000',
+                        'Business skill development training',
+                        'Marketing support and guidance',
+                        'Interest subsidy on bank loans'
+                    ],
+                    eligibility: [
+                        'Age: 18-35 years',
+                        'Minimum 10th standard education',
+                        'Valid business proposal',
+                        'Tamil Nadu domicile'
+                    ]
+                }
+            };
+
+            const scheme = schemeData[schemeId];
+            if (scheme) {
+                detailsDiv.innerHTML = `
+                    <h3>${scheme.title}</h3>
+                    <p>${scheme.description}</p>
+                    <div class="benefits-grid">
+                        <div>
+                            <h4>Benefits Include:</h4>
+                            <ul class="eligibility-list">
+                                ${scheme.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Eligibility Criteria:</h4>
+                            <ul class="eligibility-list">
+                                ${scheme.eligibility.map(criteria => `<li>${criteria}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="button" onclick="showPage('apply')">Apply Now</button>
+                `;
+            }
+        }
+
+        // Form submission handlers
+        document.getElementById('application-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Application submitted successfully!');
+        });
+
+        document.getElementById('status-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Application status: Under Processing');
+        });
+    </script>
+</body>
+</html>
